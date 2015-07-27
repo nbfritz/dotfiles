@@ -8,9 +8,10 @@ gem 'ripl-commands'
 gem 'ripl-rails'
 gem 'ripl-ripper'
 
-gem 'pry-plus'
+gem 'pry'
+gem 'pry-byebug'
 
 gem 'ripper-tags'
 gem 'gem-ripper-tags'
 
-gem 'gem-browse'
+gem 'gem-open'
