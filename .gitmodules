@@ -2,8 +2,8 @@
   path = go-tool
   url = https://github.com/srid/go-tool.git
   ignore = dirty
-[submodule "vimconfig"]
-  path = vimconfig
+[submodule ".vim"]
+  path = .vim
   url = https://github.com/nbfritz/vimconfig
   ignore = dirty
 
