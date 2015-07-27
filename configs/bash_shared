@@ -1,14 +1,14 @@
 # enable GIT completion if available
-[[ -s "$HOME/.dotfiles/git-completion.bash" ]] && source "$HOME/.dotfiles/git-completion.bash"
+[[ -s "$HOME/scripts/git-completion.bash" ]] && source "$HOME/scripts/git-completion.bash"
 
 # enable dircolors if possible
-hash dircolors 2>/dev/null && [[ -s "$HOME/.dotfiles/dircolors.256dark" ]] && eval `dircolors "$HOME/.dotfiles/dircolors.256dark"`
+hash dircolors 2>/dev/null && [[ -s "$HOME/scripts/dircolors.256dark" ]] && eval `dircolors "$HOME/scripts/dircolors.256dark"`
 
 # add git-prompt function (__git_ps1) if available
 GIT_PS1_SHOWDIRTYSTATE="Y"
 GIT_PS1_SHOWUNTRACKEDFILES="Y"
 GIT_PS1_SHOWUPSTREAM="auto"
-[[ -s "$HOME/.dotfiles/git-prompt.sh" ]] && source "$HOME/.dotfiles/git-prompt.sh"
+[[ -s "$HOME/scripts/git-prompt.sh" ]] && source "$HOME/scripts/git-prompt.sh"
 
 set_prompt () {
   ansi_reset='\e[0;37;40m'

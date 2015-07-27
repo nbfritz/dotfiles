@@ -1,0 +1,3 @@
+#/bin/bash
+mkdir /Volumes/webapachelogs
+mount -t smbfs //weblog:${WEBLOG_PASSWORD}@${WEBLOG_HOSTNAME}/webapachelogs /Volumes/webapachelogs

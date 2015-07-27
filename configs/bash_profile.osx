@@ -1,4 +1,5 @@
 . ~/.bash_shared
+. ~/.bash_SECURE
 
 alias ls="gls --color"
 
