@@ -14,3 +14,5 @@ Once the vimconfig submodule is created, update its submodules like so:
 Run the following script to symlink the configs appropriately:
 
     sh scripts/create-dotfiles-symlinks.sh
+
+A bunch of my standard fonts can be found in the /fonts folder
