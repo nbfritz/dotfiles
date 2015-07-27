@@ -1,0 +1,30 @@
+. ~/.bash_shared
+
+alias ls="gls --color"
+
+alias gpb="git checkout \$(git branch | cut -c 3- | pick)"
+
+alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
+alias deploy="ssh -t rubybuild ./deploy_to_test"
+alias build="ssh -t rubybuild ./build_package"
+function fury() { env fury $@ --as=lampogroup; }
+
+# svn functions (aliases don't allow for mid-command arguments using $@)
+function allstat() { svn status --ignore-externals $@ cfmain dr dr/sites/elp share/cfccomponents/ | grep -ve "^[\t ]*X"; }
+function alldiff() { svn diff -x -w $@ cfmain dr share/cfccomponents dr/sites/elp; }
+function allup()   { svn up $@ cfmain dr share/cfccomponents dr/sites/elp; }
+function alllog()  { 
+  for c in {dr,dr/sites/elp,cfmain,share/cfccomponents}; do 
+    echo "================================================"
+    echo " MOST RECENT LOG ENTRIES IN $c"
+    echo "================================================"
+    svn log -r {`date -v-3m +%Y-%m-%d`}:{`date -v+1m +%Y-%m-%d`} --search $USER $@ $c
+  done
+}
+
+export PATH=$PATH:/usr/local/texlive/2012/bin/universal-darwin:$HOME/Qt5.2.0/5.2.0/clang_64/bin
+export PATH=/Users/nathan.fritz/scripts:/usr/local/sbin:$PATH
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"

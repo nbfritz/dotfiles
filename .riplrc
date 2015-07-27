@@ -1,0 +1,29 @@
+# to set up RIPL for this .riplrc, run the following gem installation line
+# gem install ripl ripl-after_rc ripl-color_error ripl-color_result ripl-commands ripl-rails ripl-ripper
+
+unless Ripl.config[:web]
+  require 'ripl/color_error'
+end
+
+require 'ripl/ripper'
+Ripl.config[:multi_line_prompt] = ' > '
+
+require 'ripl/commands'
+
+require 'ripl/after_rc'
+
+require 'ripl/color_result'
+
+#require 'ripl/rocket'
+#Ripl.config[:rocket_color] = :green
+
+# temporary hack for irb way of doing things
+IRB_PROCS = {}
+Ripl.after_rc { IRB_PROCS.values.each {|proc| proc.call } }
+
+require 'ripl/hirb'
+Ripl.config[:hirb] = {:width => 156} if Ripl.config[:web]
+
+Ripl.config[:completion] = {:debug => true}
+
+#vi:ft=ruby

@@ -1,0 +1,54 @@
+# enable GIT completion if available
+[[ -s "$HOME/.dotfiles/git-completion.bash" ]] && source "$HOME/.dotfiles/git-completion.bash"
+
+# enable dircolors if possible
+hash dircolors 2>/dev/null && [[ -s "$HOME/.dotfiles/dircolors.256dark" ]] && eval `dircolors "$HOME/.dotfiles/dircolors.256dark"`
+
+# add git-prompt function (__git_ps1) if available
+GIT_PS1_SHOWDIRTYSTATE="Y"
+GIT_PS1_SHOWUNTRACKEDFILES="Y"
+GIT_PS1_SHOWUPSTREAM="auto"
+[[ -s "$HOME/.dotfiles/git-prompt.sh" ]] && source "$HOME/.dotfiles/git-prompt.sh"
+
+set_prompt () {
+  ansi_reset='\e[0;37;40m'
+  fg_gray='\e[38;5;238m'
+  bg_darkgray='\e[48;5;234m'
+  bg_gray='\e[48;5;235m'
+  bg_blue='\e[48;5;17m'
+  bg_green='\e[48;5;22m'
+  bg_red='\e[48;5;52m'
+  bg_yellow='\e[48;5;58m'
+
+  PS1="\n"
+  PS1+="$bg_blue \D{%Y-%m-%d %H:%M:%S} "
+  PS1+="$bg_green local "
+  PS1+="$bg_gray \$(pwd|awk -F\/ '{print \$(NF-1),\$(NF)}' | sed 's/ /\\//') "
+  PS1+="$bg_darkgray$fg_gray$(__git_ps1 ' (%s) ')"
+  PS1+="$ansi_reset\n$ "
+}
+PROMPT_COMMAND='set_prompt'
+
+export CLICOLOR=1
+export EDITOR=vim
+
+alias r=rails
+alias be="bundle exec"
+alias ll="ls -l"
+alias la="ls -al"
+alias ag="ag --follow --smart-case --column"
+alias ssh="TERM=screen ssh"
+alias g=git
+alias view=vim
+alias vimdiff=vim
+alias vi=vim
+
+# Bash/ZSH shell driver for 'go' (http://code.google.com/p/go-tool/).
+function go {
+    export GO_SHELL_SCRIPT=$HOME/.__tmp_go.sh
+    /usr/bin/python -m go $*
+    if [ -f $GO_SHELL_SCRIPT ] ; then
+        source $GO_SHELL_SCRIPT
+    fi
+    unset GO_SHELL_SCRIPT
+}

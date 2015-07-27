@@ -1,0 +1,142 @@
+# Configuration file for the slate window management tool for OS X.
+# For more information see: https://github.com/jigish/slate
+#
+# Config by Nathan Fritz. Updated 2014-01.
+
+# settings {{{
+#
+# instruct slate to base nudges and resizes on current screensize and to
+# use an 8x8 grid for the layout popup
+#
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+alias gridSize   8,8
+alias colWidth   screenSizeX/8
+alias rowHeight  screenSizeY/8
+alias gutter     4
+#}}}
+
+# sizing calculations {{{
+#
+# define a bunch of aliases that can be used to reference column
+# widths (C1-C8), row heights (R1-R8), horizontal positions (X1-X8),
+# vertical positions (Y1-Y8) and monitors (lmon and rmon)
+#
+# widths in columns
+alias C1   1*${colWidth}-${gutter}
+alias C2   2*${colWidth}-${gutter}
+alias C3   3*${colWidth}-${gutter}
+alias C4   4*${colWidth}-${gutter}
+alias C5   5*${colWidth}-${gutter}
+alias C6   6*${colWidth}-${gutter}
+alias C7   7*${colWidth}-${gutter}
+alias C8   8*${colWidth}-${gutter}
+
+# heights in rows
+alias R1   1*${rowHeight}-${gutter}
+alias R2   2*${rowHeight}-${gutter}
+alias R3   3*${rowHeight}-${gutter}
+alias R4   4*${rowHeight}-${gutter}
+alias R5   5*${rowHeight}-${gutter}
+alias R6   6*${rowHeight}-${gutter}
+alias R7   7*${rowHeight}-${gutter}
+alias R8   8*${rowHeight}-${gutter}
+
+# horizontal positions
+alias X1   screenOriginX+${gutter}/2
+alias X2   1*${colWidth}+${X1}
+alias X3   2*${colWidth}+${X1}
+alias X4   3*${colWidth}+${X1}
+alias X5   4*${colWidth}+${X1}
+alias X6   5*${colWidth}+${X1}
+alias X7   6*${colWidth}+${X1}
+alias X8   7*${colWidth}+${X1}
+
+# vertical positions
+alias Y1   screenOriginY+${gutter}/2
+alias Y2   1*${rowHeight}+${Y1}
+alias Y3   2*${rowHeight}+${Y1}
+alias Y4   3*${rowHeight}+${Y1}
+alias Y5   4*${rowHeight}+${Y1}
+alias Y6   5*${rowHeight}+${Y1}
+alias Y7   6*${rowHeight}+${Y1}
+alias Y8   7*${rowHeight}+${Y1}
+
+# monitors
+alias lmon 0
+alias rmon 1
+#}}}
+
+# main area aliases {{{
+#
+# using the alias defined above, define aliases to refer to chunks
+# of screen real estate. For example, L-main refers to a 5 column
+# by full-height (8 row) area starting at column 4, row 1 on the
+# left monitor.
+#
+# -----------------------------------------------------------------
+#        name                x  ;  y          w  ;  h         mon
+# -----------------------------------------------------------------
+alias   L-main      move   ${X4};${Y1}      ${C5};${R8}     ${lmon}
+alias   L-side      move   ${X1};${Y1}      ${C3};${R8}     ${lmon}
+alias   L-stop      move   ${X1};${Y1}      ${C3};${R3}     ${lmon}
+alias   L-sbot      move   ${X1};${Y4}      ${C3};${R5}     ${lmon}
+alias   L-full      move   ${X1};${Y1}      ${C8};${R8}     ${lmon}
+alias   R-main      move   ${X3};${Y1}      ${C5};${R8}     ${rmon}
+alias   R-tiny      move   ${X8};${Y1}      ${C1};${R8}     ${rmon}
+alias   R-ctop      move   ${X1};${Y1}      ${C2};${R4}     ${rmon}
+alias   R-cbot      move   ${X1};${Y5}      ${C2};${R4}     ${rmon}
+alias   R-full      move   ${X1};${Y1}      ${C8};${R8}     ${rmon}
+alias   R-slck      move   ${X1};${Y1}      ${C5};${R4}     ${rmon}
+#}}}
+
+# layouts {{{
+#
+# assign apps to the screen segments defined above so they will auto
+# snap to that position when the layout is loaded.
+#
+layout default 'Eclipse'            ${L-main}
+layout default 'RubyMine'           ${L-main}
+layout default 'MacVim'             ${L-main}
+layout default 'iTerm'              ${L-side}
+layout default 'Terminal'           ${L-side}
+layout default 'Microsoft Outlook'  ${R-main}
+layout default 'Spotify'            ${R-main}
+layout default 'Google Chrome'      ${R-main}
+layout default 'Safari'             ${R-main}
+layout default 'My Day'             ${R-tiny}
+layout default 'Console'            ${L-side}
+layout default 'Slack'              ${R-slck}
+layout default 'Adium'              ${R-cbot}
+layout default '0xDBE-EAP'          ${L-main}
+
+layout cfusion 'MacVim'             ${L-main}
+layout cfusion 'iTerm'              ${L-stop}
+layout cfusion 'Console'            ${L-sbot}
+
+#}}}
+
+# keybindings {{{
+#
+# bind shortcut keys to the various layouts, to a special mode
+# enables window selection using keyboard shortcuts, and to
+# the grid display that allows you to draw a window size.
+#
+bind space:alt           hint JKL;UIOPMYHN
+bind tab:alt             hint JKL;UIOPMYHN
+bind space:ctrl;alt;cmd  layout default
+bind space:cmd;ctrl      grid 2560x1440:${gridSize} 1920x1080:${gridSize}
+
+bind 1:ctrl;alt;cmd      layout default
+bind 2:ctrl;alt;cmd      layout cfusion
+
+bind h:ctrl;alt;cmd      chain ${L-side} | ${L-stop} | ${L-sbot}
+bind j:ctrl;alt;cmd      chain ${L-main} | ${L-full}
+bind k:ctrl;alt;cmd      chain ${L-main} | ${L-full}
+bind l:ctrl;alt;cmd      chain ${R-main} | ${R-full}
+#}}}
+
+# [if viewing in vim, expand sections with zo (one) or zn (all) and collapse with zc]
+# vi: fdm=marker
