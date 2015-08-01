@@ -1,7 +1,6 @@
-pushd `dirname $0` > /dev/null
+cd `dirname $0` > /dev/null
 cd ..
 DOTFILES=$PWD
-popd > /dev/null
 
 ln -s ${DOTFILES}/configs/Gemfile       ~/Gemfile
 ln -s ${DOTFILES}/configs/Gemfile.lock  ~/Gemfile.lock
