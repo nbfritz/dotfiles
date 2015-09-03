@@ -1,0 +1,8 @@
+#!/bin/bash
+CONTRACTOR=eric.baker
+echo Switching CFMAIN to ${CONTRACTOR}
+svn switch https://svn.peace.daveramsey.com/branches/developer/${CONTRACTOR}/daveramsey_com cfmain
+echo Switching ELPHUB to ${CONTRACTOR}
+svn switch https://svn.peace.daveramsey.com/branches/developer/${CONTRACTOR}/elphub dr/sites/elp
+echo Switching CFCCOMPONENTS to ${CONTRACTOR}
+svn switch https://svn.peace.daveramsey.com/branches/developer/${CONTRACTOR}/cfccomponents share/cfccomponents/

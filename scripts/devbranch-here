@@ -1,0 +1,1 @@
+sudo devbranch set trunk {cfmain,dr,share}

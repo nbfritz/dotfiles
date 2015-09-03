@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "Updating ELPHUB"
+svn merge https://svn.peace.daveramsey.com/trunk/elphub dr/sites/elp
+echo "Updating CFMAIN"
+svn merge https://svn.peace.daveramsey.com/trunk/daveramsey_com cfmain
+echo "Updating CFCCOMPONENTS"
+svn merge https://svn.peace.daveramsey.com/trunk/cfccomponents share/cfccomponents
+

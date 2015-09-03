@@ -12,8 +12,8 @@ function fury() { env fury $@ --as=lampogroup; }
 
 # svn functions (aliases don't allow for mid-command arguments using $@)
 function allstat() { svn status --ignore-externals $@ cfmain dr dr/sites/elp share/cfccomponents/ | grep -ve "^[\t ]*X"; }
-function alldiff() { svn diff -x -w $@ cfmain dr share/cfccomponents dr/sites/elp; }
-function allup()   { svn up $@ cfmain dr share/cfccomponents dr/sites/elp; }
+function alldiff() { svn diff -x -w $@ cfmain dr share/cfccomponents dr/sites/elp | gvim -; }
+function allup()   { svn up --ignore-externals $@ cfmain dr share/cfccomponents dr/sites/elp; }
 function alllog()  { 
   for c in {dr,dr/sites/elp,cfmain,share/cfccomponents}; do 
     echo "================================================"

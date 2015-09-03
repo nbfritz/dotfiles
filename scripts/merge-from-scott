@@ -1,0 +1,18 @@
+#!/bin/bash
+if [ $# -eq 0 ]; then
+  echo "SCRIPT ERROR: List of commits must be supplied"
+  exit
+fi
+
+commits_args=""
+for c in $*; do
+  commit_args="$commit_args -c $c"
+done
+
+echo "Updating ELPHUB"
+svn merge https://svn.peace.daveramsey.com/branches/developer/scott.coldwell/elphub dr/sites/elp $commit_args
+echo "Updating CFMAIN"
+svn merge https://svn.peace.daveramsey.com/branches/developer/scott.coldwell/daveramsey_com cfmain $commit_args
+echo "Updating CFCCOMPONENTS"
+svn merge https://svn.peace.daveramsey.com/branches/developer/scott.coldwell/cfccomponents share/cfccomponents $commit_args
+

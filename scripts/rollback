@@ -1,0 +1,2 @@
+#!/bin/bash
+svn revert -R cfmain/ share/cfccomponents/ dr/sites/elp

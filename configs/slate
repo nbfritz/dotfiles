@@ -104,6 +104,7 @@ layout default 'iTerm'              ${L-side}
 layout default 'Terminal'           ${L-side}
 layout default 'Microsoft Outlook'  ${R-main}
 layout default 'Spotify'            ${R-main}
+layout default 'Firefox'            ${R-main}
 layout default 'Google Chrome'      ${R-main}
 layout default 'Safari'             ${R-main}
 layout default 'My Day'             ${R-tiny}
