@@ -67,6 +67,8 @@ alias Y8   7*${rowHeight}+${Y1}
 # monitors
 alias lmon 0
 alias rmon 1
+alias exmon 1
+alias inmon 0
 #}}}
 
 # main area aliases {{{
@@ -79,17 +81,21 @@ alias rmon 1
 # -----------------------------------------------------------------
 #        name                x  ;  y          w  ;  h         mon
 # -----------------------------------------------------------------
-alias   L-main      move   ${X4};${Y1}      ${C5};${R8}     ${lmon}
-alias   L-side      move   ${X1};${Y1}      ${C3};${R8}     ${lmon}
-alias   L-stop      move   ${X1};${Y1}      ${C3};${R3}     ${lmon}
-alias   L-sbot      move   ${X1};${Y4}      ${C3};${R5}     ${lmon}
-alias   L-full      move   ${X1};${Y1}      ${C8};${R8}     ${lmon}
-alias   R-main      move   ${X3};${Y1}      ${C5};${R8}     ${rmon}
-alias   R-tiny      move   ${X8};${Y1}      ${C1};${R8}     ${rmon}
-alias   R-ctop      move   ${X1};${Y1}      ${C2};${R4}     ${rmon}
-alias   R-cbot      move   ${X1};${Y5}      ${C2};${R4}     ${rmon}
-alias   R-full      move   ${X1};${Y1}      ${C8};${R8}     ${rmon}
-alias   R-slck      move   ${X1};${Y1}      ${C5};${R4}     ${rmon}
+alias   tleft       move   ${X1};${Y1}      ${C3};${R5}
+alias   tleft-w     move   ${X1};${Y1}      ${C6};${R5}
+alias   bleft       move   ${X1};${Y6}      ${C3};${R3}
+alias   bcenter-n   move   ${X2};${Y6}      ${C4};${R3}
+
+alias   left-w      move   ${X1};${Y1}      ${C6};${R8}
+alias   left-n      move   ${X1};${Y1}      ${C2};${R8}
+alias   right-w     move   ${X3};${Y1}      ${C6};${R8}
+alias   right-n     move   ${X7};${Y1}      ${C2};${R8}
+alias   left        move   ${X1};${Y1}      ${C4};${R8}
+alias   right       move   ${X5};${Y1}      ${C4};${R8}
+alias   full        move   ${X1};${Y1}      ${C8};${R8}
+
+alias   ex-full     move   ${X1};${Y1}      ${C8};${R8}    ${exmon}
+alias   in-full     move   ${X1};${Y1}      ${C8};${R8}    ${inmon}
 #}}}
 
 # layouts {{{
@@ -97,25 +103,19 @@ alias   R-slck      move   ${X1};${Y1}      ${C5};${R4}     ${rmon}
 # assign apps to the screen segments defined above so they will auto
 # snap to that position when the layout is loaded.
 #
-layout default 'Eclipse'            ${L-main}
-layout default 'RubyMine'           ${L-main}
-layout default 'MacVim'             ${L-main}
-layout default 'iTerm'              ${L-side}
-layout default 'Terminal'           ${L-side}
-layout default 'Microsoft Outlook'  ${R-main}
-layout default 'Spotify'            ${R-main}
-layout default 'Firefox'            ${R-main}
-layout default 'Google Chrome'      ${R-main}
-layout default 'Safari'             ${R-main}
-layout default 'My Day'             ${R-tiny}
-layout default 'Console'            ${L-side}
-layout default 'Slack'              ${R-slck}
-layout default 'Adium'              ${R-cbot}
-layout default '0xDBE-EAP'          ${L-main}
-
-layout cfusion 'MacVim'             ${L-main}
-layout cfusion 'iTerm'              ${L-stop}
-layout cfusion 'Console'            ${L-sbot}
+layout default 'MacVim'             ${full}
+layout default 'iTerm'              ${full}
+layout default 'iTerm2'             ${full}
+layout default 'Microsoft Outlook'  ${full}
+layout default 'Spotify'            ${full}
+layout default 'Firefox'            ${full}
+layout default 'Google Chrome'      ${full}
+layout default 'Safari'             ${full}
+layout default 'Todoist'            ${full}
+layout default 'My Day'             ${right-n}
+layout default 'Slack'              ${left-w}
+layout default 'Adium'              ${bcenter-n}
+layout default 'IntelliJ IDEA'      ${full}
 
 #}}}
 
@@ -128,15 +128,14 @@ layout cfusion 'Console'            ${L-sbot}
 bind space:alt           hint JKL;UIOPMYHN
 bind tab:alt             hint JKL;UIOPMYHN
 bind space:ctrl;alt;cmd  layout default
-bind space:cmd;ctrl      grid 2560x1440:${gridSize} 1920x1080:${gridSize}
+bind space:cmd;ctrl      grid ${gridSize}
 
 bind 1:ctrl;alt;cmd      layout default
-bind 2:ctrl;alt;cmd      layout cfusion
 
-bind h:ctrl;alt;cmd      chain ${L-side} | ${L-stop} | ${L-sbot}
-bind j:ctrl;alt;cmd      chain ${L-main} | ${L-full}
-bind k:ctrl;alt;cmd      chain ${L-main} | ${L-full}
-bind l:ctrl;alt;cmd      chain ${R-main} | ${R-full}
+bind h:ctrl;alt;cmd      chain ${left}
+bind j:ctrl;alt;cmd      chain ${ex-full}
+bind k:ctrl;alt;cmd      chain ${in-full}
+bind l:ctrl;alt;cmd      chain ${right}
 #}}}
 
 # [if viewing in vim, expand sections with zo (one) or zn (all) and collapse with zc]

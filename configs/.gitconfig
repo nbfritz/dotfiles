@@ -1,0 +1,27 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+name = Nathan Fritz
+email = nathan.fritz@daveramsey.com
+[branch]
+  autosetuprebase = always # Configures all tracking branches to use rebase
+[core]
+  autocrlf = input
+  excludesfile = ~/.gitignore
+[merge]
+  ff = only # Only allow fast-forward merges
+[pull]
+  rebase = true # Rebase branches on top of the fetched branch
+[push]
+	default = current
+[alias]
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	brief = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  gvim = !gvim . +Gstatus . +Gstatus
+  mastermerge = !git checkout master && git pull && git checkout - && git rebase master
+  yolo = push --force-with-lease
+  wip = commit -a --amend --no-edit
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
