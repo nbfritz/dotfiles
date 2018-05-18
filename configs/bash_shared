@@ -1,5 +1,8 @@
+# enable bash completion if available
+[ -s "/usr/local/etc/bash_completion" ] && source "/usr/local/etc/bash_completion"
+
 # enable GIT completion if available
-[[ -s "$HOME/scripts/git-completion.bash" ]] && source "$HOME/scripts/git-completion.bash"
+[ -s "$HOME/scripts/git-completion.bash" ] && source "$HOME/scripts/git-completion.bash"
 
 # enable dircolors if possible
 hash dircolors 2>/dev/null && [[ -s "$HOME/scripts/dircolors.256dark" ]] && eval `dircolors "$HOME/scripts/dircolors.256dark"`
@@ -11,7 +14,7 @@ GIT_PS1_SHOWUPSTREAM="auto"
 [[ -s "$HOME/scripts/git-prompt.sh" ]] && source "$HOME/scripts/git-prompt.sh"
 
 set_prompt () {
-  ansi_reset='\e[0;37;40m'
+  ansi_reset='\e[0m'
   fg_gray='\e[38;5;238m'
   bg_darkgray='\e[48;5;234m'
   bg_gray='\e[48;5;235m'
@@ -43,6 +46,10 @@ alias view=vim
 alias vimdiff=vim
 alias vi=vim
 
+function pv { source $HOME/personal/venv/$@/bin/activate; }
+function aws-login { source $HOME/aws/bin/activate && aws-adfs login --adfs-host=rs.peace.daveramsey.com --region=us-east-1; }
+function ecr-login { eval $(aws ecr get-login --registry-ids 674907502808 --region us-east-1 --no-include-email); }
+#
 # Bash/ZSH shell driver for 'go' (http://code.google.com/p/go-tool/).
 function go {
     export GO_SHELL_SCRIPT=$HOME/.__tmp_go.sh

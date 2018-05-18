@@ -1,0 +1,3 @@
+#/bin/bash
+mkdir /Volumes/nathan.fritz
+mount -t smbfs //nathan.fritz:${ADFS_PASSWORD}@peace.daveramsey.com/user/nathan.fritz /Volumes/nathan.fritz

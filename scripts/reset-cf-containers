@@ -1,0 +1,49 @@
+# HOST Paths
+cfmain_path=/private/var/webapps/lampo.trunk/cfmain
+dr_path=/private/var/webapps/lampo.trunk/dr
+share_path=/private/var/webapps/lampo.trunk/share
+
+# VM Paths
+cfbasedir=/opt/coldfusion11/cfusion
+app_mount=/opt/source/wwwroot
+share_mount=/opt/source/share
+app_log=$cfbasedir/../logs/application.log
+
+# Docker Images
+cfmain_image=674907502808.dkr.ecr.us-east-1.amazonaws.com/ws-docker-coldfusion11:cfmain-3
+dr_image=674907502808.dkr.ecr.us-east-1.amazonaws.com/ws-docker-coldfusion11:dr-3
+
+# Python virtual environment
+venv_path=$HOME/aws
+
+echo "Logging in..."
+source $venv_path/bin/activate
+aws-adfs login --adfs-host=rs.peace.daveramsey.com --region=us-east-1
+eval $(aws ecr get-login --registry-ids 674907502808 --region us-east-1 --no-include-email)
+
+echo ""
+echo "Resetting cfmain container..."
+docker pull $cfmain_image
+docker rm cfmain > /dev/null
+docker create \
+       -v $cfmain_path:$app_mount \
+       -v $share_path:$share_mount \
+       --name cfmain \
+       -p 8500:8500 \
+       -it \
+       $cfmain_image \
+       "$cfbasedir/bin/cfstart.sh && tail -f $app_log"
+
+echo ""
+echo "Resetting dr container..."
+docker pull $dr_image
+docker rm dr > /dev/null
+docker create \
+       -v $dr_path:$app_mount \
+       -v $share_path:$share_mount \
+       --name dr \
+       -p 8500:8500 \
+       -it \
+       $dr_image \
+       "$cfbasedir/bin/cfstart.sh && tail -f $app_log"
+

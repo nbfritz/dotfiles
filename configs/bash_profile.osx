@@ -2,8 +2,8 @@
 . ~/.bash_SECURE
 
 alias ls="gls --color"
-
 alias gpb="git checkout \$(git branch | cut -c 3- | pick)"
+function envpass() { read -s $1; export $1; }
 
 alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
 alias deploy="ssh -t rubybuild ./deploy_to_test"
@@ -11,30 +11,28 @@ alias build="ssh -t rubybuild ./build_package"
 function fury() { env fury $@ --as=lampogroup; }
 
 # svn functions (aliases don't allow for mid-command arguments using $@)
-function allstat() { svn status --ignore-externals $@ cfmain dr dr/sites/elp share/cfccomponents/ | grep -ve "^[\t ]*X"; }
-function alldiff() { svn diff -x -w $@ cfmain dr share/cfccomponents dr/sites/elp | gvim -; }
-function allup()   { svn up --ignore-externals $@ cfmain dr share/cfccomponents dr/sites/elp; }
+function svnstat() { svn status --ignore-externals $@ | grep -ve "^[\t ]*X"; }
+function svnstat-x() { svn status $@ | grep -ve "^[\t ]*X"; }
+function allstat() { svnstat cfmain dr dr/sites/elp share/cfccomponents/; }
+function allstat-x() { svnstat-x cfmain dr dr/sites/elp share/cfccomponents/; }
+function svndiff() { svn diff -x -w $@ | gvim -; }
+function alldiff() { svndiff cfmain dr share/cfccomponents dr/sites/elp; }
+function svnup()   { svn up --ignore-externals $@; }
+function svnup-x()   { svn up $@; }
+function allup()   { svnup cfmain dr share/cfccomponents dr/sites/elp; }
+function allup-x()   { svnup-x cfmain dr share/cfccomponents dr/sites/elp; }
+function svnlog()  { svn log -r {`date -v-3m +%Y-%m-%d`}:{`date -v+1m +%Y-%m-%d`} --search $USER $@; }
 function alllog()  { 
   for c in {dr,dr/sites/elp,cfmain,share/cfccomponents}; do 
     echo "================================================"
     echo " MOST RECENT LOG ENTRIES IN $c"
     echo "================================================"
-    svn log -r {`date -v-3m +%Y-%m-%d`}:{`date -v+1m +%Y-%m-%d`} --search $USER $@ $c
+    svnlog $c
   done
 }
 
 export PATH=$PATH:/usr/local/texlive/2012/bin/universal-darwin:$HOME/Qt5.2.0/5.2.0/clang_64/bin
 export PATH=/Users/nathan.fritz/scripts:/usr/local/sbin:$PATH
+export PATH="$HOME/.rbenv/bin:$PATH"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-
-##
-# Your previous /Users/nathan.fritz/.bash_profile file was backed up as /Users/nathan.fritz/.bash_profile.macports-saved_2016-05-19_at_13:21:53
-##
-
-# MacPorts Installer addition on 2016-05-19_at_13:21:53: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# Finished adapting your PATH environment variable for use with MacPorts.
-
+eval "$(rbenv init -)"
