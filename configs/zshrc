@@ -80,11 +80,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -97,3 +97,16 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+export PATH="$HOME/miniconda3/bin:$PATH"
+
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/nathanfritz/projects/vision-stratus/vision-nx-mobile-combined/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/nathanfritz/projects/vision-stratus/vision-nx-mobile-combined/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/nathanfritz/projects/vision-stratus/vision-nx-mobile-combined/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/nathanfritz/projects/vision-stratus/vision-nx-mobile-combined/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/nathanfritz/projects/vision-stratus/vision-nx-share/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/nathanfritz/projects/vision-stratus/vision-nx-share/node_modules/tabtab/.completions/slss.zsh
