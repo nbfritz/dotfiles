@@ -94,11 +94,15 @@ alias   bottom      move   ${X1};${Y5}      ${C8};${R4}
 # assign apps to the screen segments defined above so they will auto
 # snap to that position when the layout is loaded.
 #
-layout default 'MacVim'             ${full}
+layout default 'MacVim'             ${left} ${bigMon}
 layout default 'Hyper'              ${right} ${bigMon}
+layout default 'PyCharm'            ${full} ${bigMon}
+layout default 'IntelliJ IDEA'      ${full} ${bigMon}
 layout default 'Spotify'            ${full} ${macMon}
 layout default 'Google Chrome'      ${full} ${macMon}
+layout default 'Microsoft Edge'     ${full} ${macMon}
 layout default 'Franz'              ${full} ${macMon}
+layout default 'zoom.us'            ${full} ${macMon}
 
 #}}}
 
@@ -113,8 +117,8 @@ bind tab:alt                hint JKL;UIOPMYHN
 bind space:ctrl;alt;cmd     layout default
 
 bind h:ctrl;alt;cmd         chain ${left} | ${left-w}
-bind j:ctrl;alt;cmd         chain ${full} ${macMon} | ${left-w}
-bind k:ctrl;alt;cmd         chain ${left} ${bigMon} | ${right}
+bind j:ctrl;alt;cmd         chain ${full} ${macMon} | ${center-w}
+bind k:ctrl;alt;cmd         chain ${full} ${bigMon} | ${center-n}
 bind l:ctrl;alt;cmd         chain ${right} | ${right-n}
 #}}}
 

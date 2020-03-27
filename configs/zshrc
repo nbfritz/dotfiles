@@ -80,11 +80,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -97,9 +93,14 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+source ~/bin/aliases
 
+export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/miniconda3/bin:$PATH"
 
+# configuration for android emulator
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -110,3 +111,12 @@ export PATH="$HOME/miniconda3/bin:$PATH"
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /Users/nathanfritz/projects/vision-stratus/vision-nx-share/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/nathanfritz/projects/vision-stratus/vision-nx-share/node_modules/tabtab/.completions/slss.zsh
+
+eval "$(rbenv init - )"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/nathanfritz/.sdkman"
+[[ -s "/Users/nathanfritz/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/nathanfritz/.sdkman/bin/sdkman-init.sh"
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
