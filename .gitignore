@@ -1,3 +1,4 @@
 Gemfile.lock
 .bundle
 bash_SECURE
+.DS_Store

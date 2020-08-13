@@ -16,13 +16,15 @@
 [push]
   default = current
 [alias]
-  brief = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  defbranch = !git symbolic-ref --short refs/remotes/origin/HEAD | cut -d"/" -f2
+  where = log --format=\"%C(auto)%h%d%n%C(blue bold)%cl%C(reset): %C(white bold)%s%C(reset)\" -n 1
+  brief = log --graph --decorate --oneline --all
   lol = !git brief
   br = !git brief --color=always | head -n $((`tput lines` / 2))
-  devmerge = !git checkout develop && git pull && git checkout - && git rebase develop
+  devmerge = !git checkout develop && git symbolic-ref --short HEAD && git pull && git checkout - && git rebase develop
   mastermerge = !git checkout master && git pull && git checkout - && git rebase master
-  yolo = push --force-with-lease
-  amend = commit -a --amend --no-edit
+  yolo = !gitverify && git push --force-with-lease
+  amend = !gitverify && git commit -a --amend --no-edit
   co = checkout
 [filter "lfs"]
   clean = git-lfs clean -- %f

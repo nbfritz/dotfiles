@@ -79,10 +79,10 @@ alias Y8   7*${rowHeight}+${Y1}
 alias   full        move   ${X1};${Y1}      ${C8};${R8}
 alias   left        move   ${X1};${Y1}      ${C4};${R8}
 alias   right       move   ${X5};${Y1}      ${C4};${R8}
-alias   left-w      move   ${X1};${Y1}      ${C6};${R8}
-alias   left-n      move   ${X1};${Y1}      ${C2};${R8}
-alias   right-w     move   ${X3};${Y1}      ${C6};${R8}
-alias   right-n     move   ${X7};${Y1}      ${C2};${R8}
+alias   left-w      move   ${X1};${Y1}      ${C5};${R8}
+alias   left-n      move   ${X1};${Y1}      ${C3};${R8}
+alias   right-w     move   ${X4};${Y1}      ${C5};${R8}
+alias   right-n     move   ${X6};${Y1}      ${C3};${R8}
 alias   center-n    move   ${X3};${Y1}      ${C4};${R8}
 alias   center-w    move   ${X2};${Y1}      ${C6};${R8}
 alias   top         move   ${X1};${Y1}      ${C8};${R4}
@@ -94,15 +94,18 @@ alias   bottom      move   ${X1};${Y5}      ${C8};${R4}
 # assign apps to the screen segments defined above so they will auto
 # snap to that position when the layout is loaded.
 #
-layout default 'MacVim'             ${left} ${bigMon}
-layout default 'Hyper'              ${right} ${bigMon}
-layout default 'PyCharm'            ${full} ${bigMon}
-layout default 'IntelliJ IDEA'      ${full} ${bigMon}
-layout default 'Spotify'            ${full} ${macMon}
-layout default 'Google Chrome'      ${full} ${macMon}
-layout default 'Microsoft Edge'     ${full} ${macMon}
-layout default 'Franz'              ${full} ${macMon}
-layout default 'zoom.us'            ${full} ${macMon}
+layout default 'MacVim'                 ${left} ${bigMon}
+layout default 'Hyper'                  ${right} ${bigMon}
+layout default 'PyCharm'                ${full} ${bigMon}
+layout default 'IntelliJ IDEA'          ${full} ${bigMon}
+layout default 'Code'                   ${full} ${bigMon} | ${full} ${macMon}
+layout default 'Spotify'                ${full} ${macMon}
+layout default 'Google Chrome'          ${full} ${macMon}
+layout default 'Microsoft Edge'         ${full} ${macMon}
+layout default 'Slack'                  ${full} ${macMon}
+layout default 'Franz'                  ${full} ${macMon}
+layout default 'XOi Technologies Mail'  ${full} ${macMon}
+layout default 'zoom.us'                ${full} ${macMon} | ${full} ${bigMon}
 
 #}}}
 
