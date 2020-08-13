@@ -1,7 +1,0 @@
-#!/bin/bash
-echo Switching CFMAIN to SCOTT
-svn switch https://svn.peace.daveramsey.com/branches/developer/scott.coldwell/daveramsey_com cfmain
-echo Switching ELPHUB to SCOTT
-svn switch https://svn.peace.daveramsey.com/branches/developer/scott.coldwell/elphub dr/sites/elp
-echo Switching CFCCOMPONENTS to SCOTT
-svn switch https://svn.peace.daveramsey.com/branches/developer/scott.coldwell/cfccomponents share/cfccomponents/

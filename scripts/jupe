@@ -1,3 +1,0 @@
-#!/bin/bash
-source /Users/nathan.fritz/jupyter-python/bin/activate
-jupyter-notebook /Users/nathan.fritz/Documents/Jupyter\ Notebooks

@@ -1,5 +1,0 @@
-#!/bin/bash
-sudo tomcatctl start dr
-sudo tomcatctl start cfmain
-sudo apachectl start
-sudo mysqld_safe &

@@ -1,7 +1,0 @@
-# Python virtual environment
-venv_path=$HOME/aws
-
-echo "Logging in..."
-source $venv_path/bin/activate
-aws-adfs login --adfs-host=rs.peace.daveramsey.com --region=us-east-1
-eval $(aws ecr get-login --registry-ids 674907502808 --region us-east-1 --no-include-email)

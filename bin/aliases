@@ -1,0 +1,9 @@
+alias sad='scripts/setup_envs.py; scripts/deploy_all.py'
+
+function pipenv() {
+  if [ -e "./Pipfile" ]; then
+    $(whence -p pipenv) "$@"
+  else
+    echo "No Pipfile found. NOT CREATING ONE."
+  fi
+}

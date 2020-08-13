@@ -1,7 +1,0 @@
-#!/bin/bash
-echo Switching CFMAIN to TRUNK
-svn switch https://svn.peace.daveramsey.com/trunk/daveramsey_com cfmain
-echo Switching ELPHUB to TRUNK
-svn switch https://svn.peace.daveramsey.com/trunk/elphub dr/sites/elp
-echo Switching CFCCOMPONENTS to TRUNK
-svn switch https://svn.peace.daveramsey.com/trunk/cfccomponents share/cfccomponents/
