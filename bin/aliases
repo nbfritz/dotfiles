@@ -7,3 +7,5 @@ function pipenv() {
     echo "No Pipfile found. NOT CREATING ONE."
   fi
 }
+
+alias gvim="/mnt/c/Program\ Files\ \(x86\)/Vim/vim82/gvim.exe"

@@ -6,7 +6,13 @@ echo "**************************************************************************
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y vim tmux git zsh curl
+sudo apt install -y vim tmux git zsh curl wget
+sudo apt install -y --no-install-recommends \
+                 autoconf bison make build-essential libssl-dev zlib1g-dev libbz2-dev \
+                 libreadline-dev libsqlite3-dev llvm libncurses5-dev xz-utils \
+                 tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libyaml-dev \
+                 libreadline6-dev libgdbm6 libgdbm-dev libdb-dev
+
 
 
 echo
@@ -28,6 +34,9 @@ echo "**************************************************************************
   
 if [ ! -d ~/.asdf ]; then
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0-rc1
+  asdf plugin add python
+  asdf plugin add ruby
+  asdf plugin add nodejs
 else
   echo "SKIPPING..."
 fi
