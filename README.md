@@ -23,5 +23,5 @@ A bunch of my standard fonts can be found in the /fonts folder
 This script should do it all!
 
 ```sh
-sh -c $(curl -fsSL https://raw.github.com/nbfritz/dotfiles/master/bin/linux-setup.sh)
+sudo apt update && sudo apt install curl && sh -c $(curl -fsSL https://raw.github.com/nbfritz/dotfiles/master/bin/linux-setup.sh)
 ```
