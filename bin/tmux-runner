@@ -2,4 +2,4 @@
 
 SESSION_NAME=${1:-default}-$(basename $PWD)
 
-/usr/local/bin/tmux new -A -t $SESSION_NAME
+/usr/bin/env tmux new -A -t $SESSION_NAME

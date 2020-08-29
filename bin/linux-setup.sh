@@ -57,7 +57,7 @@ echo "**************************************************************************
   
 if [ ! -d ~/.dotfiles ]; then
   git clone git@github.com:nbfritz/dotfiles ~/.dotfiles
-  sh ~/.dotfiles/create-dotfiles-symlinks.sh
+  sh ~/.dotfiles/setup.sh
 else
   echo "SKIPPING..."
 fi
