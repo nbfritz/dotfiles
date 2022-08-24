@@ -1,14 +1,12 @@
 #!/bin/zsh
-git where
+prompt_text="""$(git last --color)
+
+"""
 
 if [[ "$(git log --format=%ae -n1)" != "$(git config --global user.email)" ]]; then
-  prompt_text="YOU ARE NOT THE LAST COMMITTER! Are you REALLY sure?"
+  prompt_text+="YOU ARE NOT THE LAST COMMITTER! Are you REALLY sure?"
 else
-  prompt_text="Are you sure?"
+  prompt_text+="Are you sure?"
 fi
 
-read "REPLY?$prompt_text " 
-
-if [[ $REPLY =~ ^[^Yy]$ ]]; then
-  exit 1
-fi
+exit $(gum confirm --selected.background="4" --default="No" $prompt_text)

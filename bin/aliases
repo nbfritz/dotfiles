@@ -1,4 +1,6 @@
-alias sad='scripts/setup_envs.py; scripts/deploy_all.py'
+alias sad='find . -iname Pipfile.lock -depth 2 -execdir pipenv install --dev \; && scripts/deploy_all.py'
+alias ipy=ipython
+alias yarnhelp="jq '.scripts | to_entries[] | \"\\(.key)|\\(.value)\"' package.json -r | column -t -s\\| | gum choose | xargs yarn"
 
 function pipenv() {
   if [ -e "./Pipfile" ]; then
@@ -7,5 +9,3 @@ function pipenv() {
     echo "No Pipfile found. NOT CREATING ONE."
   fi
 }
-
-alias gvim="/mnt/c/Program\ Files\ \(x86\)/Vim/vim82/gvim.exe"

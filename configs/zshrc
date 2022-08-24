@@ -68,7 +68,7 @@ ZSH_THEME="avit"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git wd asdf)
+plugins=(git wd asdf yarn)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -96,9 +96,13 @@ export EDITOR='vim'
 source ~/bin/aliases
 
 export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/miniconda3/bin:$PATH"
 
 # configuration for android emulator
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 
+export SETUPTOOLS_USE_DISTUTILS=stdlib
+
+# *- set by XOI script [/Users/nfritz/projects/vision-web/scripts/setup-web-dev-env]
+# alias for vision-web, to be used for local development
+export VISION_WEB_ALIAS=vision-web.d2ub711m26qd7e.cloudfront.net

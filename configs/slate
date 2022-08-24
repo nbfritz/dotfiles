@@ -12,11 +12,11 @@ config defaultToCurrentScreen true
 config nudgePercentOf screenSize
 config resizePercentOf screenSize
 
-alias colWidth   screenSizeX/8
-alias rowHeight  screenSizeY/8
+alias colWidth   screenSizeX/12
+alias rowHeight  screenSizeY/12
 alias gutter     4
 alias macMon     1344x840
-alias bigMon     1920x1080
+alias bigMon     2560x1440
 #}}}
 
 # sizing calculations {{{
@@ -118,6 +118,7 @@ layout default 'zoom.us'                ${full} ${macMon} | ${full} ${bigMon}
 bind space:alt              hint JKL;UIOPMYHN
 bind tab:alt                hint JKL;UIOPMYHN
 bind space:ctrl;alt;cmd     layout default
+bind space:shift;alt;cmd    grid 1344x840:12,8 2560x1440:12,8
 
 bind h:ctrl;alt;cmd         chain ${left} | ${left-w}
 bind j:ctrl;alt;cmd         chain ${full} ${macMon} | ${center-w}
