@@ -1,6 +1,6 @@
-alias sad='find . -iname Pipfile.lock -depth 2 -execdir pipenv install --dev \; && scripts/deploy_all.py'
 alias ipy=ipython
 alias yarnhelp="jq '.scripts | to_entries[] | \"\\(.key)|\\(.value)\"' package.json -r | column -t -s\\| | fzf | cut -f1 -w | xargs yarn"
+alias be="bundle exec"
 
 function pipenv() {
   if [ -e "./Pipfile" ]; then

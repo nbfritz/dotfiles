@@ -1,0 +1,10 @@
+#!/bin/sh
+if pg_ctl status > /dev/null; then
+  echo "Stopping Postgres"
+  echo "----------------------------------------"
+  pg_ctl stop
+  echo "----------------------------------------"
+else
+  echo "Postgres is not running"
+fi
+

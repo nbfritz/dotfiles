@@ -9,4 +9,8 @@ else
   prompt_text+="Are you sure?"
 fi
 
-exit $(gum confirm --selected.background="4" --default="No" $prompt_text)
+read "REPLY?$prompt_text "
+
+if [[ $REPLY =~ ^[^Yy]$ ]]; then
+  exit 1
+fi

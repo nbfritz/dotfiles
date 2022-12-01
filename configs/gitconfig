@@ -1,20 +1,20 @@
 # This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
   name = Nathan Fritz
-  email = nfritz@xoi.io
+  email = nbfritz@gmail.com
 [branch]
   autosetuprebase = always # Configures all tracking branches to use rebase
 [core]
   autocrlf = input
   excludesfile = ~/.gitignore
-	pager = cat
+  pager = bat
 [merge]
-  ff = only # Only allow fast-forward merges
+#  ff = only # Only allow fast-forward merges
 [pull]
-  rebase = true # Rebase branches on top of the fetched branch
+#  rebase = true # Rebase branches on top of the fetched branch
 [push]
   default = current
+  autoSetupRemote = true
 [alias]
   # helpers used by other aliases
   x-list-branches = branch --format "%(refname:short)"
@@ -27,12 +27,12 @@
     --bind="space:toggle" \
     --ansi \
     --multi \
-    --preview=\"git diff {} develop --stat -M --color\" \
+    --preview=\"git diff {} main --stat -M --color\" \
     --preview-window="$([[ $(tput cols) -gt 160 ]] && echo 'right' || echo 'up,70%')"
 
   x-fzf-w-branch = !fzf \
     --ansi \
-    --preview=\"git diff {} develop --stat -M --color\" \
+    --preview=\"git diff {} main --stat -M --color\" \
     --preview-window="$([[ $(tput cols) -gt 160 ]] && echo 'right' || echo 'up,70%')"
 
   x-fzf-w-prinfo = !fzf \
@@ -47,14 +47,14 @@
   brief = log --graph --decorate --oneline
   lol = !git brief
   br = !git brief --color=always | head -n $((`tput lines` / 2))
-  devmerge = !git checkout develop && git symbolic-ref --short HEAD && git pull && git checkout - && git rebase develop
-  mastermerge = !git checkout master && git pull && git checkout - && git rebase master
-  mainmerge = !git checkout main && git pull && git checkout - && git rebase main
+  mainrebase = !git checkout main && git pull && git checkout - && git rebase main
+  mainmerge = !git checkout main && git pull && git checkout - && git merge main
   yolo = !gitverify && git push --force-with-lease
   amend = !gitverify && git commit -a --amend --no-edit
   co = checkout
   prco = !gh pr checkout
   wip = commit -nm "WIP"
+  cikick = "!git pull --rebase && git commit --allow-empty -nm 'Kick off CI' && git push"
 
   # crazy fzf integrations
   cleanup = !git x-list-branches | git x-fzf-multi-w-branch | xargs git branch -d

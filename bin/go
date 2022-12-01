@@ -1,0 +1,4 @@
+cd ~/Projects/tropic
+tmux split-window -v bin/prydev
+tmux split-window -h bin/rails server -p 3000
+
