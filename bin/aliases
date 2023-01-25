@@ -2,6 +2,8 @@ alias ipy=ipython
 alias yarnhelp="jq '.scripts | to_entries[] | \"\\(.key)|\\(.value)\"' package.json -r | column -t -s\\| | fzf | cut -f1 -w | xargs yarn"
 alias be="bundle exec"
 
+alias fresh="bin/fresh && bin/rails r ../after_fresh.rb"
+
 function pipenv() {
   if [ -e "./Pipfile" ]; then
     $(whence -p pipenv) "$@"

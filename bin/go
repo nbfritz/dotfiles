@@ -1,4 +1,4 @@
 cd ~/Projects/tropic
-tmux split-window -v bin/prydev
+tmux split-window -vbl 66% bin/prydev
 tmux split-window -h bin/rails server -p 3000
-
+tmux select-pane -D

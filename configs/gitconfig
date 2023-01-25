@@ -63,6 +63,8 @@
   pickall = !git x-all-branches | git x-fzf-w-branch | sed \"s/^origin\\///\" | xargs git checkout
   prpick = !git x-list-prs | git x-fzf-w-prinfo | xargs gh pr checkout
 
+  sc = !scbranch
+
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f

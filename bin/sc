@@ -1,8 +1,0 @@
-QUERY='owner:fritz%20team:"contract%20management"%20state:"in%20progress"'
-
-curl -X GET \
-  -H "Content-Type: application\json" \
-  -H "Shortcut-Token: $SC_TOKEN" \
-  -L "https://api.app.shortcut.com/api/v3/search/stories?query=${QUERY}" \
-  | jq -r '.data[] | "="*80, "SC-\(.id): \(.name)", "="*80, "", .description, "\n\n"'
-
