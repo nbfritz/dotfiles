@@ -1,0 +1,19 @@
+#!/bin/zsh
+
+TARGET_PATH=~/Desktop/flakify-output
+mkdir -p $TARGET_PATH
+
+while [ true ]; do
+  NOW=`date +"%Y%m%d%H%M%S"`
+  TARGET_FILE="$TARGET_PATH/$NOW.log"
+
+  echo "Starting $NOW pass..."
+
+  rspec --tag focus --format doc 1>$TARGET_FILE 2>/dev/null
+  if grep -q "0 failures" $TARGET_FILE; then
+    echo "  no failures, cleaning up."
+    rm $TARGET_FILE
+  else
+    echo "  failures found in $TARGET_FILE."
+  fi
+done

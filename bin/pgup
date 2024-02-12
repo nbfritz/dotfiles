@@ -1,9 +1,0 @@
-#!/bin/sh
-if pg_ctl status > /dev/null; then
-  echo "Postgres is already running"
-else
-  echo "Starting Postgres"
-  echo "------------------------------------"
-  pg_ctl -D /Users/nathanfritz/.asdf/installs/postgres/13.2/data -l logfile start
-  echo "------------------------------------"
-fi

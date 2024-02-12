@@ -1,24 +1,32 @@
-DEFAULT='owner:fritz team:"contract management" is:started'
+DEFAULT='owner:fritz is:started'
 QUERY=`echo "${1:-$DEFAULT}" | sed "s/ /%20/g"`
+BRANCH_PREFIX='core-procurement/'
 #!/bin/zsh
 
-FZF_CHOICE=$(
+SC_FETCH="
   curl -sX GET \
-    -H "Content-Type: application\json" \
-    -H "Shortcut-Token: $SC_TOKEN" \
-    -L "https://api.app.shortcut.com/api/v3/search/stories?query=$QUERY" \
-    | jq -r '.data[] | "\(.id)\t\(.name)"' \
-    | fzf \
+    -H 'Content-Type: application\json' \
+    -H 'Shortcut-Token: $SC_TOKEN' \
+    -L 'https://api.app.shortcut.com/api/v3/search/stories?query=$QUERY'
+  | jq -r '.data[] | \"\(.id)\\t\(.name)\"'
+"
+
+SC_PREVIEW="
+  curl -sX GET \
+    -H 'Content-Type: application\json' \
+    -H 'Shortcut-Token: $SC_TOKEN' \
+    -L 'https://api.app.shortcut.com/api/v3/stories/{1}' \
+  | jq -r '\"SC-\(.id): \(.name)\", \"=\"*80, .description'
+"
+
+FZF_CHOICE=$(
+  eval $SC_FETCH | fzf \
       --ansi \
-      --preview="
-        curl -sX GET \
-          -H 'Content-Type: application\json' \
-          -H 'Shortcut-Token: $SC_TOKEN' \
-          -L 'https://api.app.shortcut.com/api/v3/stories/{}' \
-          | jq -r '\"SC-\(.id): \(.name)\", \"=\"*80, .description'
-      " \
+      --preview="$SC_PREVIEW" \
       --preview-window="$([[ $(tput cols) -gt 160 ]] && echo 'right' || echo 'up,70%')"
 )
+
+if [[ -z "$FZF_CHOICE" ]]; then exit; fi
 
 FORK_FROM=${FORK_FROM:-main}
 if [[ "$FORK_FROM" == "here" ]]; then
@@ -33,8 +41,8 @@ git pull
 echo $FZF_CHOICE
 SC_ID=$(echo $FZF_CHOICE | cut -wf1)
 
-echo "contracts/sc-$SC_ID-\c" 
+echo "${BRANCH_PREFIX}sc-$SC_ID-\c" 
 read DESCR
 
-BRANCH="contracts/sc-$SC_ID-$(echo $DESCR | sed s/\W/-/g)"
+BRANCH="${BRANCH_PREFIX}sc-$SC_ID-$(echo $DESCR | sed s/\W/-/g)"
 git co -b $BRANCH

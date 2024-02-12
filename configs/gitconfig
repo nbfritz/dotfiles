@@ -27,34 +27,34 @@
     --bind="space:toggle" \
     --ansi \
     --multi \
-    --preview=\"git diff {} main --stat -M --color\" \
+    --preview=\"git diff {1} main --stat -M --color\" \
     --preview-window="$([[ $(tput cols) -gt 160 ]] && echo 'right' || echo 'up,70%')"
 
   x-fzf-w-branch = !fzf \
     --ansi \
-    --preview=\"git diff {} main --stat -M --color\" \
+    --preview=\"git diff {1} main --stat -M --color\" \
     --preview-window="$([[ $(tput cols) -gt 160 ]] && echo 'right' || echo 'up,70%')"
 
   x-fzf-w-prinfo = !fzf \
     --ansi \
     --header-lines=3 \
-    --preview=\"echo {} | cut -wf1 | GH_FORCE_TTY=100% xargs gh pr view\" \
+    --preview=\"echo {1} | cut -wf1 | GH_FORCE_TTY=100% xargs gh pr view\" \
     --preview-window="$([[ $(tput cols) -gt 160 ]] && echo 'right' || echo 'up,70%') | cut -wf1"
 
   # normal aliases
   defbranch = !git symbolic-ref --short refs/remotes/origin/HEAD | cut -d"/" -f2
   last = log --format=\"%C(auto)%h%d%n%C(blue bold)%cl%C(reset): %C(white bold)%s%C(reset)\" -n 1
   brief = log --graph --decorate --oneline
-  lol = !git brief
+  lol = brief
   br = !git brief --color=always | head -n $((`tput lines` / 2))
-  mainrebase = !git checkout main && git pull && git checkout - && git rebase main
-  mainmerge = !git checkout main && git pull && git checkout - && git merge main
+  rebasemain = !git fetch && git rebase origin/main
   yolo = !gitverify && git push --force-with-lease
   amend = !gitverify && git commit -a --amend --no-edit
   co = checkout
   prco = !gh pr checkout
   wip = commit -nm "WIP"
   cikick = "!git pull --rebase && git commit --allow-empty -nm 'Kick off CI' && git push"
+  touchedspecs = !git diff main --diff-filter=d --name-only | grep spec | xargs bundle exec rspec
 
   # crazy fzf integrations
   cleanup = !git x-list-branches | git x-fzf-multi-w-branch | xargs git branch -d
