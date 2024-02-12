@@ -21,7 +21,7 @@
   x-all-branches = x-list-branches -a
   x-remote-branches = listbranches -r
 
-  x-list-prs = !GH_FORCE_TTY=100% gh pr list
+  x-list-prs = !GH_FORCE_TTY=100% gh pr list -L 200 | tail -n+5
 
   x-fzf-multi-w-branch = !fzf \
     --bind="space:toggle" \
@@ -38,8 +38,8 @@
   x-fzf-w-prinfo = !fzf \
     --ansi \
     --header-lines=3 \
-    --preview=\"echo {1} | cut -wf1 | GH_FORCE_TTY=100% xargs gh pr view\" \
-    --preview-window="$([[ $(tput cols) -gt 160 ]] && echo 'right' || echo 'up,70%') | cut -wf1"
+    --preview=\"echo {1} | GH_FORCE_TTY=100% xargs gh pr view\" \
+    --preview-window="$([[ $(tput cols) -gt 160 ]] && echo 'right' || echo 'up,70%')"
 
   # normal aliases
   defbranch = !git symbolic-ref --short refs/remotes/origin/HEAD | cut -d"/" -f2
