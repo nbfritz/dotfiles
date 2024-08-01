@@ -7,7 +7,7 @@
 [core]
   autocrlf = input
   excludesfile = ~/.gitignore
-  pager = bat
+  pager = "bat --style=numbers,grid"
 [merge]
 #  ff = only # Only allow fast-forward merges
 [pull]
@@ -37,7 +37,6 @@
 
   x-fzf-w-prinfo = !fzf \
     --ansi \
-    --header-lines=3 \
     --preview=\"echo {1} | GH_FORCE_TTY=100% xargs gh pr view\" \
     --preview-window="$([[ $(tput cols) -gt 160 ]] && echo 'right' || echo 'up,70%')"
 

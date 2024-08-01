@@ -1,7 +1,6 @@
 DEFAULT='owner:fritz is:started'
-QUERY=`echo "${1:-$DEFAULT}" | sed "s/ /%20/g"`
-BRANCH_PREFIX='core-procurement/'
-#!/bin/zsh
+QUERY=$(echo "${1:-$DEFAULT}" | sed "s/ /%20/g")
+BRANCH_PREFIX='platform/'
 
 SC_FETCH="
   curl -sX GET \
@@ -41,7 +40,7 @@ git pull
 echo $FZF_CHOICE
 SC_ID=$(echo $FZF_CHOICE | cut -wf1)
 
-echo "${BRANCH_PREFIX}sc-$SC_ID-\c" 
+echo "${BRANCH_PREFIX}sc-$SC_ID-\c"
 read DESCR
 
 BRANCH="${BRANCH_PREFIX}sc-$SC_ID-$(echo $DESCR | sed s/\W/-/g)"
