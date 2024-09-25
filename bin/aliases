@@ -16,4 +16,5 @@ alias find-new-specs="git diff --name-only head `git merge-base HEAD main` | gre
 alias run-new-specs="find-new-specs | xargs rspec --format=doc"
 
 alias pbm="git pull && bundle install && bin/rails db:migrate && bin/rails db:migrate RAILS_ENV=test"
+
 alias lg=lazygit

@@ -41,28 +41,38 @@
     --preview-window="$([[ $(tput cols) -gt 160 ]] && echo 'right' || echo 'up,70%')"
 
   # normal aliases
-  defbranch = !git symbolic-ref --short refs/remotes/origin/HEAD | cut -d"/" -f2
-  last = log --format=\"%C(auto)%h%d%n%C(blue bold)%cl%C(reset): %C(white bold)%s%C(reset)\" -n 1
-  brief = log --graph --decorate --oneline
-  lol = brief
-  br = !git brief --color=always | head -n $((`tput lines` / 2))
-  rebasemain = !git fetch && git rebase origin/main
-  yolo = !gitverify && git push --force-with-lease
+  default-branch = !git symbolic-ref --short refs/remotes/origin/HEAD | cut -d"/" -f2
+
   amend = !gitverify && git commit -a --amend --no-edit
-  co = checkout
-  prco = !gh pr checkout
+  brief = log --graph --decorate --oneline
+  brief-half = !git brief --color=always | head -n $((`tput lines` / 2))
+  ci-kick = "!git pull --rebase && git commit --allow-empty -nm 'Kick off CI' && git push"
+  push-force = !gitverify && git push --force-with-lease
+  last = log --format=\"%C(auto)%h%d%n%C(blue bold)%cl%C(reset): %C(white bold)%s%C(reset)\" -n 1
+  pr-checkout = !gh pr checkout
+  rebase-continue = rebase --continue
+  rebase-main = !git fetch && git rebase origin/main
+  touched-specs = !git diff main --diff-filter=d --name-only | grep spec | xargs bundle exec rspec
   wip = commit -nm "WIP"
-  cikick = "!git pull --rebase && git commit --allow-empty -nm 'Kick off CI' && git push"
-  touchedspecs = !git diff main --diff-filter=d --name-only | grep spec | xargs bundle exec rspec
 
   # crazy fzf integrations
   cleanup = !git x-list-branches | git x-fzf-multi-w-branch | xargs git branch -d
-  forcecleanup = !git x-list-branches | git x-fzf-multi-w-branch | xargs git branch -D
+  cleanup-force = !git x-list-branches | git x-fzf-multi-w-branch | xargs git branch -D
   pick = !git x-list-branches | git x-fzf-w-branch | xargs git checkout
-  pickall = !git x-all-branches | git x-fzf-w-branch | sed \"s/^origin\\///\" | xargs git checkout
-  prpick = !git x-list-prs | git x-fzf-w-prinfo | cut -wf1 | xargs gh pr checkout
+  pick-all = !git x-all-branches | git x-fzf-w-branch | sed \"s/^origin\\///\" | xargs git checkout
+  pr-pick = !git x-list-prs | git x-fzf-w-prinfo | cut -wf1 | xargs gh pr checkout
 
+  # short codes
+  br = brief-half
+  co = checkout
+  cl = cleanup
+  clf = cleanup-force
+  prco = pr-checkout
+  prp = pick-pr
+  rc = rebase-continue
+  rm = rebase-main
   sc = !scbranch
+  yolo = push-force
 
 [filter "lfs"]
   clean = git-lfs clean -- %f
