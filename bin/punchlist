@@ -1,0 +1,6 @@
+#!/bin/sh
+echo "Cleaning up pasteboard for punchlist use"
+pbpaste | sed '/spec/!d' | sed 's/^.*: spec/spec/' | sed s/#L/:/ | pbcopy
+echo "DONE:"
+echo "---------------------------------------------------------------"
+pbpaste

@@ -8,7 +8,42 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="avit"
+#ZSH_THEME="headline"
+source ~/dotfiles/configs/headline.zsh-theme
+HL_SEP_MODE='on'
+HL_OVERWRITE='on'
+HL_INFO_MODE='auto'
+HL_SEP=(
+  _PRE  '┍' # consider '┌' or '╭'
+  _LINE '—' # consider '─'
+  _POST '┑' # consider '┐' or '╮'
+)
+HL_LAYOUT_ORDER=(_PRE HOST PATH _SPACER BRANCH STATUS _POST)
+HL_LAYOUT_STYLE="%{$light_black%}"
+HL_LAYOUT_TEMPLATE=(
+  _PRE    '│'
+  HOST    ' ...'
+  PATH    ' ...'
+  _SPACER ""
+  BRANCH  ' ...'
+  STATUS  ' ...'
+  _POST   ' │'
+)
+HL_CONTENT_TEMPLATE=(
+  HOST    "%{$red%} ..."
+  PATH    "%{$yellow%} ..."
+  BRANCH  "%{$green%} ..."
+  STATUS  "%{$blue%}..."
+)
+HL_CONTENT_SOURCE[USER]=''
+HL_CONTENT_SOURCE[VENV]=''
+HL_GIT_SEP_SYMBOL=''
+HL_GIT_STATUS_SYMBOLS[CONFLICTS]="%{$red%}✘"
+HL_GIT_STATUS_SYMBOLS[CLEAN]="%{$green%}✔"
+HL_PROMPT="%{$HL_LAYOUT_STYLE%}╯ %{$reset%}$ "
+HL_CLOCK_MODE='on'
+HL_CLOCK_TEMPLATE="%{$faint%} ... %{$reset$HL_LAYOUT_STYLE%}╰"
+HL_ERR_MODE='on'
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -81,7 +116,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -102,4 +137,4 @@ export PATH="$HOME/bin:$PATH"
 fortune | cowsay
 
 export TROPIC_EMAIL=nathan.fritz@tropicapp.io
-
+export TEAM=r2d2

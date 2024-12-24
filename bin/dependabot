@@ -1,0 +1,13 @@
+#*/bin/sh
+
+if [ -n "$(git status --porcelain)" ]; then
+  echo "*************************************"
+  echo "* GIT CHECKOUT ISN'T CLEAN. HALTING *"
+  echo "*************************************"
+  exit
+fi
+
+git dependabot-pick && bin/env_update && bin/dev
+
+
+

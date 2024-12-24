@@ -22,6 +22,7 @@
   x-remote-branches = listbranches -r
 
   x-list-prs = !GH_FORCE_TTY=100% gh pr list -L 200 | tail -n+5
+  x-list-dependabots = !GH_FORCE_TTY=100% gh pr list -L 200 --app dependabot | tail -n+5
 
   x-fzf-multi-w-branch = !fzf \
     --bind="space:toggle" \
@@ -61,6 +62,7 @@
   pick = !git x-list-branches | git x-fzf-w-branch | xargs git checkout
   pick-all = !git x-all-branches | git x-fzf-w-branch | sed \"s/^origin\\///\" | xargs git checkout
   pr-pick = !git x-list-prs | git x-fzf-w-prinfo | cut -wf1 | xargs gh pr checkout
+  dependabot-pick = !git x-list-dependabots | git x-fzf-w-prinfo | cut -wf1 | xargs gh pr checkout
 
   # short codes
   br = brief-half
@@ -70,7 +72,7 @@
   prco = pr-checkout
   prp = pick-pr
   rc = rebase-continue
-  rm = rebase-main
+  rem = rebase-main
   sc = !scbranch
   yolo = push-force
 
