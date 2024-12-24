@@ -15,7 +15,7 @@ HL_OVERWRITE='on'
 HL_INFO_MODE='auto'
 HL_SEP=(
   _PRE  '' # consider '┌' or '╭'
-  _LINE '_' # consider '─'
+  _LINE '—' # consider '─'
   _POST '' # consider '┐' or '╮'
 )
 HL_LAYOUT_ORDER=(_PRE HOST PATH _SPACER BRANCH STATUS _POST)
