@@ -14,35 +14,34 @@ HL_SEP_MODE='on'
 HL_OVERWRITE='on'
 HL_INFO_MODE='auto'
 HL_SEP=(
-  _PRE  '┍' # consider '┌' or '╭'
-  _LINE '—' # consider '─'
-  _POST '┑' # consider '┐' or '╮'
+  _PRE  '' # consider '┌' or '╭'
+  _LINE '_' # consider '─'
+  _POST '' # consider '┐' or '╮'
 )
 HL_LAYOUT_ORDER=(_PRE HOST PATH _SPACER BRANCH STATUS _POST)
 HL_LAYOUT_STYLE="%{$light_black%}"
 HL_LAYOUT_TEMPLATE=(
-  _PRE    '│'
-  HOST    ' ...'
-  PATH    ' ...'
-  _SPACER ""
-  BRANCH  ' ...'
-  STATUS  ' ...'
-  _POST   ' │'
+  _PRE    ''
+  HOST    '...'
+  PATH    '...'
+  _SPACER ''
+  BRANCH  '...'
+  STATUS  '...'
+  _POST   ''
 )
 HL_CONTENT_TEMPLATE=(
-  HOST    "%{$red%} ..."
-  PATH    "%{$yellow%} ..."
-  BRANCH  "%{$green%} ..."
-  STATUS  "%{$blue%}..."
+  HOST    "%{$red%}  ... "
+  PATH    "%{$yellow%}  ... "
+  BRANCH  "%{$green%}  ... "
+  STATUS  "%{$blue%} ... "
 )
 HL_CONTENT_SOURCE[USER]=''
 HL_CONTENT_SOURCE[VENV]=''
 HL_GIT_SEP_SYMBOL=''
 HL_GIT_STATUS_SYMBOLS[CONFLICTS]="%{$red%}✘"
 HL_GIT_STATUS_SYMBOLS[CLEAN]="%{$green%}✔"
-HL_PROMPT="%{$HL_LAYOUT_STYLE%}╯ %{$reset%}$ "
 HL_CLOCK_MODE='on'
-HL_CLOCK_TEMPLATE="%{$faint%} ... %{$reset$HL_LAYOUT_STYLE%}╰"
+HL_CLOCK_TEMPLATE="%{$faint%} ..."
 HL_ERR_MODE='on'
 
 # Set list of themes to pick from when loading at random
