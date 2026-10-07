@@ -11,17 +11,16 @@ return {{
     dashboard = {
       enabled = true,
       sections = {
-        { pane = 1, section = "header" },
-        { pane = 1, section = "keys", padding = 2 },
-        { pane = 1, section = "startup", padding = 2 },
-        { pane = 2, icon = " ", title = "Projects", section = "projects", limit = 3, indent = 2, padding = 1 },
-        { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", limit = 6, indent = 2, padding = 1 },
+        { section = "header", padding = 1 },
+        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+        { icon = " ", title = "Projects", section = "projects", limit = 3, indent = 2, padding = 1 },
+        { icon = " ", title = "Recent Files", section = "recent_files", limit = 6, indent = 2, padding = 1 },
         {
-          pane = 2, icon = " ", title = "Git Status", section = "terminal",
-          height = 5, padding = 1, ttl = 5 * 60, indent = 3,
+          icon = " ", title = "Git Status", section = "terminal", height = 5, padding = 1, ttl = 5 * 60, indent = 3,
           enabled = function() return Snacks.git.get_root() ~= nil end,
           cmd = "git status --short --branch --renames",
         },
+        { section = "startup", padding = 2 },
       },
     },
     explorer = { enabled = true },
