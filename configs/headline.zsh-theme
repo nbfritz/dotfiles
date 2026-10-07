@@ -1,10 +1,10 @@
 #!/bin/zsh
 
 # Headline ZSH Prompt
-# Copyright (c) 2024 Moarram under the MIT License
+# Copyright (c) 2025 Moarram under the MIT License
 
 # To install, source this file from your ~/.zshrc
-# Customization variables begin around line 80
+# Customization variables begin around line 60
 
 
 # Formatting aliases
@@ -18,41 +18,25 @@ invert=$'\e[7m';    no_invert=$'\e[27m'
 # ...
 
 # Foreground color aliases
-black=$'\e[30m'
-red=$'\e[31m'
-green=$'\e[32m'
-yellow=$'\e[33m'
-blue=$'\e[34m'
-magenta=$'\e[35m'
-cyan=$'\e[36m'
-white=$'\e[37m'
-light_black=$'\e[90m'
-light_red=$'\e[91m'
-light_green=$'\e[92m'
-light_yellow=$'\e[93m'
-light_blue=$'\e[94m'
-light_magenta=$'\e[95m'
-light_cyan=$'\e[96m'
-light_white=$'\e[97m'
+black=$'\e[30m';   light_black=$'\e[90m'
+red=$'\e[31m';     light_red=$'\e[91m'
+green=$'\e[32m';   light_green=$'\e[92m'
+yellow=$'\e[33m';  light_yellow=$'\e[93m'
+blue=$'\e[34m';    light_blue=$'\e[94m'
+magenta=$'\e[35m'; light_magenta=$'\e[95m'
+cyan=$'\e[36m';    light_cyan=$'\e[96m'
+white=$'\e[37m';   light_white=$'\e[97m'
 default_fg=$'\e[39m'
 
 # Background color aliases
-black_bg=$'\e[40m'
-red_bg=$'\e[41m'
-green_bg=$'\e[42m'
-yellow_bg=$'\e[43m'
-blue_bg=$'\e[44m'
-magenta_bg=$'\e[45m'
-cyan_bg=$'\e[46m'
-white_bg=$'\e[47m'
-light_black_bg=$'\e[100m'
-light_red_bg=$'\e[101m'
-light_green_bg=$'\e[102m'
-light_yellow_bg=$'\e[103m'
-light_blue_bg=$'\e[104m'
-light_magenta_bg=$'\e[105m'
-light_cyan_bg=$'\e[106m'
-light_white_bg=$'\e[107m'
+black_bg=$'\e[40m';   light_black_bg=$'\e[100m'
+red_bg=$'\e[41m';     light_red_bg=$'\e[101m'
+green_bg=$'\e[42m';   light_green_bg=$'\e[102m'
+yellow_bg=$'\e[43m';  light_yellow_bg=$'\e[103m'
+blue_bg=$'\e[44m';    light_blue_bg=$'\e[104m'
+magenta_bg=$'\e[45m'; light_magenta_bg=$'\e[105m'
+cyan_bg=$'\e[46m';    light_cyan_bg=$'\e[106m'
+white_bg=$'\e[47m';   light_white_bg=$'\e[107m'
 default_bg=$'\e[49m'
 
 # Custom colors
@@ -79,19 +63,6 @@ clear_entire_screen=$'\e[2J'
 # Use the following variables to customize the theme.
 # If you're setting them in ~/.zshrc, source the theme, THEN set the variables.
 # To insert styles (ANSI SGR codes defined above) use syntax: "%{$style%}"
-
-
-# Print separator and information line with precmd hook or in PROMPT
-HL_PRINT_MODE='precmd' # precmd|prompt
-
-# Print the separator line always, when not following clear screen, or don't print
-HL_SEP_MODE='auto' # on|auto|off
-
-# Print the information line always, when it has changed, or don't print
-HL_INFO_MODE='on' # on|auto|off
-
-# Press <enter> with no commands to overwrite previous prompt
-HL_OVERWRITE='off' # on|off
 
 
 # Style applied to separator line, after other styles
@@ -240,6 +211,19 @@ HL_ERR_TEMPLATE="%{$faint$italic%}→ ..."
 HL_ERR_DETAIL_TEMPLATE=' (...)'
 
 
+# Print separator and information line with precmd hook or in PROMPT
+HL_PRINT_MODE='precmd' # precmd|prompt
+
+# Print the separator line always, when not following clear screen, or don't print
+HL_SEP_MODE='auto' # on|auto|off
+
+# Print the information line always, when it has changed, or don't print
+HL_INFO_MODE='on' # on|auto|off
+
+# Press <enter> with no commands to overwrite previous prompt
+HL_OVERWRITE='off' # on|off
+
+
 # The string to replace in templates
 HL_TEMPLATE_TOKEN='...'
 
@@ -352,7 +336,7 @@ headline-git-status-counts() {
     'AHEAD' 0 # commits ahead
     'DIVERGED' 0 # commits diverged
     'STASHED' 0 # stashed files
-    'CONFLICTS' 0 # conflicts
+    'CONFLICTS' 0 # conflicted files
     'CLEAN' 1 # clean branch 1=true 0=false
   )
 
@@ -434,6 +418,7 @@ headline-git-status() {
 
 # Transfer styles to another string
 headline-transfer-styles() { # (str, str)
+  # Note: This assumes styles are wrapped with %{ and %}
   local -a src=( ${(@s::)1} ) # source char array
   local -a dest=( ${(@s::)2} ) # destination char array
   local result=''
@@ -514,6 +499,7 @@ headline-precmd() {
   for key val in "${(@kv)HL_CONTENT_SOURCE}"; do
     content_lengths[$key]=0
     (( $COLUMNS < ${HL_COLS_REMOVAL[$key]:-0} )) && continue # omit segment
+    (( ! $HL_LAYOUT_ORDER[(Ie)$key] )) && continue # omit segment not in layout
     contents[$key]=$(eval ${=val})
     local -i length=$(headline-prompt-len ${contents[$key]:-''} 999)
     (( content_length += $length )); content_lengths[$key]=$length

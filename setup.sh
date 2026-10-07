@@ -13,6 +13,7 @@ if [ ! -f ~/.gitconfig ]   ; then ln -s ${DOTFILES}/configs/gitconfig     ~/.git
 if [ ! -f ~/.vimrc ]       ; then ln -s ${DOTFILES}/vimconfig/vimrc       ~/.vimrc       ; fi
 if [ ! -f ~/.gvimrc ]      ; then ln -s ${DOTFILES}/vimconfig/gvimrc      ~/.gvimrc      ; fi
 if [ ! -d ~/.vim ]         ; then ln -s ${DOTFILES}/vimconfig             ~/.vim         ; fi
+if [ ! -d ~/.config/nvim ] ; then ln -s ${DOTFILES}/nvimconfig            ~/.config/nvim ; fi
 if [ ! -d ~/bin ]          ; then ln -s ${DOTFILES}/bin                   ~/bin          ; fi
 
 echo if this is OS X, remember to:

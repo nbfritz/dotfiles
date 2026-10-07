@@ -1,4 +1,4 @@
-DEFAULT='owner:fritz is:started'
+DEFAULT='owner:fritz is:started !state:qa !is:archived'
 QUERY=$(echo "${1:-$DEFAULT}" | sed "s/ /%20/g")
 BRANCH_PREFIX="${TEAM:-platform}/"
 

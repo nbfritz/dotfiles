@@ -1,5 +1,0 @@
-#!/bin/zsh
-
-SESSION_NAME=${1:-default}-$(basename $PWD)
-
-/opt/homebrew/bin/tmux new -A -t $SESSION_NAME

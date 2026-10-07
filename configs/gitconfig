@@ -53,8 +53,9 @@
   pr-checkout = !gh pr checkout
   rebase-continue = rebase --continue
   rebase-main = !git fetch && git rebase origin/main
-  touched-specs = !git diff main --diff-filter=d --name-only | grep spec | xargs bundle exec rspec
+  touched-specs = !git diff main --diff-filter=d --name-only | grep spec
   wip = commit -nm "WIP"
+  unwip = reset head^
 
   # crazy fzf integrations
   cleanup = !git x-list-branches | git x-fzf-multi-w-branch | xargs git branch -d

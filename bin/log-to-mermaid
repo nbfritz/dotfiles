@@ -1,0 +1,4 @@
+FILE=`mktemp -u` 
+bin/rails r "puts WorkflowVisualizationHelper.new.from_json(%q~`pbpaste`~).generate_markup" > $FILE.mmd
+mmdc -i $FILE.mmd -e png -o $FILE.png -w ${CHART_WIDTH:-1920}
+open $FILE.png

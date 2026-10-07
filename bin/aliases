@@ -1,20 +1,3 @@
-alias ipy=ipython
-alias yarnhelp="jq '.scripts | to_entries[] | \"\\(.key)|\\(.value)\"' package.json -r | column -t -s\\| | fzf | cut -f1 -w | xargs yarn"
 alias be="bundle exec"
-
-alias fresh="bin/fresh && bin/rails r ../after_fresh.rb"
-
-function pipenv() {
-  if [ -e "./Pipfile" ]; then
-    $(whence -p pipenv) "$@"
-  else
-    echo "No Pipfile found. NOT CREATING ONE."
-  fi
-}
-
-alias find-new-specs="git diff --name-only head `git merge-base HEAD main` | grep _spec | xargs ls -1df 2>/dev/null"
-alias run-new-specs="find-new-specs | xargs rspec --format=doc"
-
-alias pbm="git pull && bundle install && bin/rails db:migrate && bin/rails db:migrate RAILS_ENV=test"
-
 alias lg=lazygit
+alias tmux-refresh="tmux split && exit"

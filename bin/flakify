@@ -3,13 +3,18 @@
 TARGET_PATH=~/Desktop/flakify-output
 mkdir -p $TARGET_PATH
 
+FILES=`ag -l '(fdescribe|fit "|fcontext|:focus|focus:\s*true)' -G '_spec.rb$' spec`
+
+echo Rerunning focused specs in:
+echo $FILES
+
 while [ true ]; do
   NOW=`date +"%Y%m%d%H%M%S"`
   TARGET_FILE="$TARGET_PATH/$NOW.log"
 
   echo "Starting $NOW pass..."
 
-  rspec --tag focus --format doc 1>$TARGET_FILE 2>/dev/null
+  echo $FILES | xargs rspec --tag focus --format doc 1>$TARGET_FILE 2>/dev/null
   if grep -q "0 failures" $TARGET_FILE; then
     echo "  no failures, cleaning up."
     rm $TARGET_FILE

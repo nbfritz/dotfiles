@@ -1,0 +1,2 @@
+#!/bin/bash
+pbpaste | sed "s/=>/: /" | sed "s/: nil/: null/" | sed -E "s/: ([0-9\-]{10} [^,]*)/: \"\1\"/" | jq .
