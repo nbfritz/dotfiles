@@ -16,5 +16,10 @@ if [ ! -d ~/.vim ]         ; then ln -s ${DOTFILES}/vimconfig             ~/.vim
 if [ ! -d ~/.config/nvim ] ; then ln -s ${DOTFILES}/nvimconfig            ~/.config/nvim ; fi
 if [ ! -d ~/bin ]          ; then ln -s ${DOTFILES}/bin                   ~/bin          ; fi
 
+if [ ! -f ~/.config/lazygit/config.yml] ; then 
+  mkdir -p ~/.config/lazygit
+  ln -s ${DOTFILES}/configs/lazygit-config.yml ~/.config/lazygit/config.yml
+fi
+
 echo if this is OS X, remember to:
 echo   ln -s ${DOTFILES}/configs/bash_profile.osx ~/.bash_profile

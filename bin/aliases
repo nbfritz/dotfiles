@@ -1,3 +1,8 @@
 alias be="bundle exec"
 alias lg=lazygit
 alias tmux-refresh="tmux split && exit"
+
+alias work="tmux split -h -p 33 claude && nvim"
+alias serve="tmux split -h -p 33 -d tail -f log/development.log && tmux split -h -p 50 -bd bin/dev && clear"
+
+alias alias-edit="vim ~/bin/aliases && source ~/bin/aliases"

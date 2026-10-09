@@ -7,16 +7,23 @@
 [core]
   autocrlf = input
   excludesfile = ~/.gitignore
-  pager = "bat --style=numbers,grid"
+#  pager = "bat --style=numbers,grid"
+  pager = delta
 [merge]
 #  ff = only # Only allow fast-forward merges
+  conflictStyle = zdiff3
 [pull]
 #  rebase = true # Rebase branches on top of the fetched branch
 [push]
   default = current
   autoSetupRemote = true
 [diff]
-	tool = nvimdiff
+#  tool = nvimdiff
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  dark = true      # or light = true, or omit for auto-detection
 [alias]
   # helpers used by other aliases
   x-list-branches = branch --format "%(refname:short)"
