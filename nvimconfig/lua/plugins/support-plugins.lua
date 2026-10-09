@@ -1,4 +1,7 @@
 return {
+  { "folke/tokyonight.nvim", lazy = false, priority = 1000, opts = {} },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+
   { "MunifTanjim/nui.nvim", lazy = true },
 
   {
@@ -19,5 +22,11 @@ return {
         return package.loaded["nvim-web-devicons"]
       end
     end,
-  }
+  },
+
+  {
+    'nvim-treesitter/nvim-treesitter',
+    lazy = false,
+    build = ':TSUpdate'
+  },
 }

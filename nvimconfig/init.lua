@@ -28,3 +28,6 @@ vim.g.maplocalleader = "\\"
 
 -- Kick off the lazy.nvim plugin manager load process
 require("config.lazy")
+
+-- Color scheme is loaded by lazy
+vim.cmd([[colorscheme catppuccin-mocha]])
