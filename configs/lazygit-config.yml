@@ -1,18 +1,37 @@
 gui:
-  theme:
-    activeBorderColor:
-      - green
-      - bold
-  showIcons: true
-
+  screenMode: 'normal'
+  sidePanelWidth: 0.333
+  expandFocusedSidePanel: false
+  nerdFontsVersion: 3
+  border: 'rounded'
+  commandLogSize: 16
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never
+  diffRenderers:
+    - colorArg: always
+      command: delta --dark --paging=never
   commit:
     signOff: false
-
-keybinding:
-  universal:
-    quit: 'q'
-    return: '<esc>'
+customCommands:
+  - key: '<c-n>'
+    description: 'New branch from Shortcut ticket'
+    context: 'localBranches'
+    command: 'git co {{ .Form.baseBranch }} && git pull && git co -b {{ .Form.branchName }}'
+    prompts:
+      - type: 'menuFromCommand'
+        title: 'Shortcut ticket:'
+        key: 'scid'
+        command: 'sclist'
+        filter: '(.*)\t(.*)'
+        valueFormat: '{{ .group_1 }}'
+        labelFormat: '[{{ .group_1 }}] {{ .group_2 }}'
+      - type: 'input'
+        title: 'Branch name:'
+        key: 'branchName'
+        initialValue: 'platform/sc-{{ .Form.scid }}-'
+      - type: 'menu'
+        title: 'Base branch:'
+        key: 'baseBranch'
+        options:
+          - value: 'main'
+          - value: '{{ .SelectedLocalBranch.Name }}'
+promptToReturnFromSubprocess: false

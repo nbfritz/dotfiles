@@ -12,6 +12,7 @@ vim.opt.ruler         = true
 vim.opt.visualbell    = true
 vim.opt.showcmd       = true
 vim.opt.list          = true
+vim.opt.colorcolumn   = "110"
 
 vim.opt.swapfile      = false
 vim.opt.backup        = false

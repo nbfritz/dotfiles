@@ -2,7 +2,21 @@ alias be="bundle exec"
 alias lg=lazygit
 alias tmux-refresh="tmux split && exit"
 
-alias work="tmux split -h -p 33 claude && nvim"
-alias serve="tmux split -h -p 33 -d tail -f log/development.log && tmux split -h -p 50 -bd bin/dev && clear"
+remember() {
+  clear
+  echo "\n\n\n\n\n"
+  figlet -c -w$(tmux display-message -p "#{pane_width}") -fdoh $* | lolcat
+}
+
+work() { 
+  tmux split -h -p 33 claude agents && ${1:-lazygit}
+}
+
+serve() {
+  tmux split -h -p 33 -d tail -f log/development.log
+  tmux split -h -p 50 -bd bin/dev
+  tmux rename-window servers
+  remember These are the servers
+}
 
 alias alias-edit="vim ~/bin/aliases && source ~/bin/aliases"

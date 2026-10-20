@@ -20,8 +20,11 @@ return {
       vim.lsp.enable('ts_ls')
 
       vim.lsp.config('ruby_lsp', {
-        cmd = { 'bundle', 'exec', 'ruby-lsp' },
+        -- cmd = { 'bundle', 'exec', 'ruby-lsp' },
         filetypes = { 'ruby' },
+        init_options = {
+          enabledFeatureFlags = { fullTestDiscovery = true },
+        },
       })
       vim.lsp.enable('ruby_lsp')
     end
