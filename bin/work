@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+setopt pipe_fail
+
+open_tab_in_herdr() {
+  local -a label_args
+  local shell_pane claude_pane
+  [[ -n "$1" ]] && label_args=(--label "$1")
+  shell_pane=$(herdr tab create --cwd "$2" $label_args --focus | jq -r '.result.root_pane.pane_id') || return
+  claude_pane=$(herdr pane split "$shell_pane" --direction right --ratio 0.67 --cwd "$2" --focus | jq -r '.result.pane.pane_id') || return
+  herdr pane run "$claude_pane" claude > /dev/null
+}
+
+open_tab_in_tmux() {
+  local -a name_args
+  [[ -n "$1" ]] && name_args=(-n "$1")
+  tmux new-window -c "$2" $name_args || return
+  tmux split -h -p 33 -c "$2" claude
+}
+
+directory=${2:-$PWD}
+[[ -d "$directory" ]] || { print -u2 "work: no such directory: $directory"; exit 1 }
+directory=${directory:A}
+
+if [[ "$HERDR_ENV" == 1 ]]; then
+  open_tab_in_herdr "$1" "$directory"
+else
+  open_tab_in_tmux "$1" "$directory"
+fi

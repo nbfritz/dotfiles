@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+setopt pipe_fail
+source ~/bin/aliases
+
+split_herdr_pane() {
+  local pane_id
+  pane_id=$(herdr pane split --current --direction right --ratio $1 --cwd "$PWD" --no-focus | jq -r '.result.pane.pane_id') || return
+  herdr pane run "$pane_id" "$2" > /dev/null
+  echo "$pane_id"
+}
+
+open_servers_in_herdr() {
+  local dev_pane
+  split_herdr_pane 0.67 "tail -f log/development.log" > /dev/null || return
+  dev_pane=$(split_herdr_pane 0.5 bin/dev) || return
+  herdr pane swap --source-pane "$HERDR_PANE_ID" --target-pane "$dev_pane" > /dev/null
+  herdr tab rename "$HERDR_TAB_ID" servers > /dev/null
+}
+
+open_servers_in_tmux() {
+  tmux split -h -p 33 -d tail -f log/development.log
+  tmux split -h -p 50 -bd bin/dev
+  tmux rename-window servers
+}
+
+if [[ "$HERDR_ENV" == 1 ]]; then
+  open_servers_in_herdr || exit
+else
+  open_servers_in_tmux || exit
+fi

@@ -98,3 +98,9 @@ if [[ -f ~/.zsh_SECURE ]]; then source ~/.zsh_SECURE; fi
 
 # helps with installing postgres via asdf
 export PKG_CONFIG_PATH="$(brew --prefix)/opt/icu4c/lib/pkgconfig"
+
+# open the initial herdr pane in the tropic repo instead of $HOME
+if [[ ${HERDR_ENV:-} == 1 && $PWD == $HOME ]]; then cd ~/Projects/tropic; fi
+
+# added by dbx installer
+export PATH="$HOME/.dbx/bin:$PATH"

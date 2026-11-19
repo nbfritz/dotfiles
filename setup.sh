@@ -4,13 +4,14 @@ cd $DOTFILES
 # git submodule init
 # git submodule update
 
-if [ ! -f ~/.bash_shared ] ; then ln -s ${DOTFILES}/configs/bash_shared   ~/.bash_shared ; fi
-if [ ! -f ~/.tmux.conf ]   ; then ln -s ${DOTFILES}/configs/tmux.conf     ~/.tmux.conf   ; fi
-if [ ! -f ~/.zshrc ]       ; then ln -s ${DOTFILES}/configs/zshrc         ~/.zshrc       ; fi
-if [ ! -f ~/.gitconfig ]   ; then ln -s ${DOTFILES}/configs/gitconfig     ~/.gitconfig   ; fi
+if [ ! -f ~/.bash_shared ] ; then ln -s ${DOTFILES}/configs/bash_shared   ~/.bash_shared  ; fi
+if [ ! -f ~/.tmux.conf ]   ; then ln -s ${DOTFILES}/configs/tmux.conf     ~/.tmux.conf    ; fi
+if [ ! -f ~/.zshrc ]       ; then ln -s ${DOTFILES}/configs/zshrc         ~/.zshrc        ; fi
+if [ ! -f ~/.gitconfig ]   ; then ln -s ${DOTFILES}/configs/gitconfig     ~/.gitconfig    ; fi
+if [ ! -f ~/.default-gems] ; then ln -s ${DOTFILES}/configs/default-gems  ~/.default-gems ; fi
 
-if [ ! -d ~/.config/nvim ] ; then ln -s ${DOTFILES}/nvimconfig            ~/.config/nvim ; fi
-if [ ! -d ~/bin ]          ; then ln -s ${DOTFILES}/bin                   ~/bin          ; fi
+if [ ! -d ~/.config/nvim ] ; then ln -s ${DOTFILES}/nvimconfig            ~/.config/nvim  ; fi
+if [ ! -d ~/bin ]          ; then ln -s ${DOTFILES}/bin                   ~/bin           ; fi
 
 LG_CONFIG=`lg -cd`
 if [ ! -f "${LG_CONFIG}/config.yml] ; then 

@@ -24,9 +24,30 @@ return {
     end,
   },
 
+  -- Parsers are compiled locally on install, which needs the tree-sitter CLI (plus curl, tar and a C compiler,
+  -- which macOS already has):
+  --
+  --   brew install tree-sitter-cli
   {
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
-    build = ':TSUpdate'
+    build = ':TSUpdate',
+    config = function()
+      require('nvim-treesitter').install({ 'ruby', 'embedded_template', 'html', 'javascript', 'css' })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = { 'ruby', 'eruby' },
+        callback = function() vim.treesitter.start() end,
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = { 'ruby' },
+        callback = function()
+          vim.wo[0][0].foldmethod = 'expr'
+          vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          vim.wo[0][0].foldlevel = 99
+        end,
+      })
+    end,
   },
 }
