@@ -4,6 +4,8 @@ return {
 
   { "MunifTanjim/nui.nvim", lazy = true },
 
+  { "j-hui/fidget.nvim", opts = {} },
+
   {
     "nvim-mini/mini.icons",
     lazy = true,
@@ -26,7 +28,6 @@ return {
 
   -- Parsers are compiled locally on install, which needs the tree-sitter CLI (plus curl, tar and a C compiler,
   -- which macOS already has):
-  --
   --   brew install tree-sitter-cli
   {
     'nvim-treesitter/nvim-treesitter',

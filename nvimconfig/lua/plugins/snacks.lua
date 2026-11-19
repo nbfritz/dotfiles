@@ -56,6 +56,26 @@ return {{
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
   },
+  init = function()
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      callback = function()
+        Snacks.toggle.line_number():map("<leader>on")
+        Snacks.toggle.new({
+          id = "relative_number",
+          name = "Relative Line Numbers",
+          get = function()
+            return vim.opt_local.relativenumber:get()
+          end,
+          set = function(state)
+            vim.opt_local.number = true
+            vim.opt_local.relativenumber = state
+          end,
+        }):map("<leader>or")
+        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>ow")
+      end,
+    })
+  end,
   keys = {
     -- dashboard
     { "<leader>w", function() Snacks.dashboard() end, desc = "Welcome Window" },
@@ -117,7 +137,7 @@ return {{
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
-    { "gR", function() Snacks.picker.grep_word() end, desc = "Grep word under cursor", mode = { "n", "x" } },
+    { "gw", function() Snacks.picker.grep_word() end, desc = "Grep word under cursor", mode = { "n", "x" } },
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
     { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
